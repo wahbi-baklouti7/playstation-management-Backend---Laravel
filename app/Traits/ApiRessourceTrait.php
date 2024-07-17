@@ -36,4 +36,9 @@ trait ApiRessourceTrait{
             'data' => $data
         ], $code);
     }
+
+    public function returnValidationError($validator){
+
+        return $this->errorMessage($validator->errors()->first(), 422);
+    }
 }

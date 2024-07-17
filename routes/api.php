@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\AuthenticationController;
 use App\Http\Controllers\API\DeviceController;
+use App\Http\Controllers\API\GameController;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,6 +31,9 @@ Route::apiResource('/users',UserController::class);
 // ===================== Begin Devices Routes =====================
 Route::apiResource('/devices',DeviceController::class);
 // ===================== End Devices Routes =====================
+// ===================== Begin Games Routes =====================
+Route::apiResource('/games',GameController::class);
+// ===================== End Games Routes =====================
 
 Route::post('/login',[AuthenticationController::class,'login']);
 Route::post('/register',[AuthenticationController::class,'register']);
