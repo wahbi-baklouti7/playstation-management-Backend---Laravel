@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\AuthenticationController;
+use App\Http\Controllers\API\DeviceController;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,6 +26,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // ===================== Begin Users Routes =====================
 Route::apiResource('/users',UserController::class);
 // ===================== End Users Routes =====================
+
+// ===================== Begin Devices Routes =====================
+Route::apiResource('/devices',DeviceController::class);
+// ===================== End Devices Routes =====================
 
 Route::post('/login',[AuthenticationController::class,'login']);
 Route::post('/register',[AuthenticationController::class,'register']);
