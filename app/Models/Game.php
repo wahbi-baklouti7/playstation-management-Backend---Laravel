@@ -10,4 +10,10 @@ class Game extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'price'];
+
+
+    public function sessions()
+    {
+        return $this->hasMany(Session::class);
+    }
 }
