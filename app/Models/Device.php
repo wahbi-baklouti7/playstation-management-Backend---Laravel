@@ -12,4 +12,9 @@ class Device extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function sessions()
+    {
+        return $this->hasMany(Session::class);
+    }
 }

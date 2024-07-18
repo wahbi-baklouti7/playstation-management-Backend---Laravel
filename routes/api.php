@@ -3,9 +3,9 @@
 use App\Http\Controllers\API\AuthenticationController;
 use App\Http\Controllers\API\DeviceController;
 use App\Http\Controllers\API\GameController;
+use App\Http\Controllers\API\SessionController;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,8 +35,15 @@ Route::apiResource('/devices',DeviceController::class);
 Route::apiResource('/games',GameController::class);
 // ===================== End Games Routes =====================
 
+// ===================== Begin Sessions Routes =====================
+Route::apiResource('/sessions',SessionController::class);
+Route::get('/sessions/user/{user}',[SessionController::class,'getUserSessions']);
+Route::get('sessions/device/{device}',[SessionController::class,'getDeviceSessions']);
+Route::get('sessions/game/{game}',[SessionController::class,'getGameSessions']);
+// ===================== End Sessions Routes =====================
+
+// ===================== Begin Authentication Routes =====================
 Route::post('/login',[AuthenticationController::class,'login']);
 Route::post('/register',[AuthenticationController::class,'register']);
 Route::post('/logout',[AuthenticationController::class ,'logout'])->middleware('auth:sanctum');
-
-
+// ===================== End Authentication Routes =====================
