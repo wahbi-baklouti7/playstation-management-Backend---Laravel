@@ -24,6 +24,7 @@ class GameUpdateRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'min:3', 'max:30' ,'unique:games,name,'.$this->game->id],
             'price' => ['required', 'numeric', 'min:0', 'max:100'],
+            'extra_time_price' => ['required', 'numeric', 'min:0', 'max:100']
         ];
     }
 }
