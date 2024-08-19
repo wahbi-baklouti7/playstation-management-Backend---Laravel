@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Http\Resources\UserResource;
+use App\Http\Resources\V1\UserResource;
 use App\Models\User;
 use App\Traits\ApiRessourceTrait;
 use Illuminate\Http\Request;
@@ -55,7 +55,8 @@ class AuthenticationController extends Controller
         // add token to ressource
 
         return $this->returnData(
-           [ 'access_token'=> $token],
+           ["user"=>new UserResource($user),
+            'access_token'=> $token],
             'User logged in successfully'
         );
         // return $this->returnData(
