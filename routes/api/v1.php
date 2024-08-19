@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\V1\AuthenticationController;
+use App\Http\Controllers\API\V1\DashboardController;
 use App\Http\Controllers\API\V1\DeviceController;
 use App\Http\Controllers\API\V1\GameController;
 use App\Http\Controllers\API\V1\SessionController;
@@ -41,12 +42,15 @@ Route::apiResource('/games',GameController::class);
 Route::get('/sessions/user/{user}',[SessionController::class,'getUserSessions']);
 Route::get('/sessions/device/{device}',[SessionController::class,'getDeviceSessions']);
 Route::get('/sessions/game/{game}',[SessionController::class,'getGameSessions']);
-Route::get('/sessions/game-counts',[SessionController::class,'getGameSessionsCount']);
-Route::get('/sessions/device-total-amount',[SessionController::class,'getTotalAmountByDevice']);
-Route::get('/sessions/game-total-amount',[SessionController::class,'getTotalAmountByGame']);
 // Route::get('/sessions/game-counts',[SessionController::class,'getSessionsByDate']);
 Route::apiResource('/sessions',SessionController::class);
 // ===================== End Sessions Routes =====================
+
+// ===================== Begin Dashboard Routes =====================
+Route::get('/dashboard/game-counts',[DashboardController::class,'getGameSessionsCount']);
+Route::get('/dashboard/device-total-amount',[DashboardController::class,'getTotalAmountByDevice']);
+Route::get('/dashboard/game-total-amount',[DashboardController::class,'getTotalAmountByGame']);
+// ===================== End Dashboard Routes =====================
 
 // ===================== Begin Authentication Routes =====================
 Route::post('/login',[AuthenticationController::class,'login']);

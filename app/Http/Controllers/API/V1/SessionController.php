@@ -112,31 +112,7 @@ class SessionController extends Controller
     }
 
     // get the number of sessions for each game
-    public function getGameSessionsCount(){
 
-
-        try {
-            $gameSessionsCount = Session::select('games.name', DB::raw('count(*) as total'))->
-            join('games', 'sessions.game_id', '=', 'games.id')
-            ->whereNull('games.deleted_at')
-            ->groupBy('games.id')
-            ->get();
-            return $this->returnData($gameSessionsCount, 'Sessions retrieved successfully', 200);
-        } catch (\Exception $e) {
-            // Log the error
-            Log::error('Error retrieving game sessions count: ' . $e->getMessage());
-
-            return $this->errorMessage('Failed to retrieve game sessions count', 500);
-        }
-
-
-        // dd("fffff");
-        // return "fffff";
-        // return $this->returnData(11,'Sessions retrieved successfully',200);
-
-        // $gameSessionsCount = Session::select('game_id',DB::raw('count(*) as total'))->groupBy('game_id')->get();
-        // return $this->returnData($gameSessionsCount,'Sessions retrieved successfully',200);
-}
 
 
 // get the session for last 30 days or this month this year
@@ -146,29 +122,7 @@ public function getSessionsByDate(Request $request){
     return $this->returnData($sessions,'Sessions retrieved successfully',200);
 }
 
-// get the total amount of session  by each device and game and user
-public function getTotalAmountByDeviceAndGameAndUser(Request $request){
-    $device_id = $request->device_id;
-    $game_id = $request->game_id;
-    $user_id = $request->user_id;
-    $totalAmount = Session::where('device_id',$device_id)->where('game_id',$game_id)->where('user_id',$user_id)->sum('amount');
-    return $this->returnData($totalAmount,'Total amount retrieved successfully',200);
-}
-// get the total amount of sessions grouped by  devices name
-public function getTotalAmountByDevice(Request $request){
-    $totalAmount = Session::select('devices.name',DB::raw('sum(amount) as total'))
-    ->join('devices', 'sessions.device_id', '=', 'devices.id')
-    ->groupBy('devices.id')
-    ->get();
-    return $this->returnData($totalAmount,'Total amount retrieved successfully',200);
-}
-public function getTotalAmountByGame(Request $request){
-    $totalAmount = Session::select('games.name',DB::raw('sum(amount) as total'))
-    ->join('games', 'sessions.game_id', '=', 'games.id')
-    ->groupBy('games.id')
-    ->get();
-    return $this->returnData($totalAmount,'Total amount retrieved successfully',200);
-}
+
 }
 
 
