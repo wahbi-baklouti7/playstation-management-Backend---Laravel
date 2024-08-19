@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Devices\StoreDeviceRequest;
 use App\Http\Requests\Devices\UpdateDeviceRequest;
+use App\Http\Resources\V1\DeviceResource;
 use App\Models\Device;
 use App\Traits\ApiRessourceTrait;
 
@@ -16,7 +17,7 @@ class DeviceController extends Controller
      */
     public function index()
     {
-        return $this->returnData(Device::all());
+        return $this->returnData(DeviceResource::collection(Device::all()));
     }
 
     /**

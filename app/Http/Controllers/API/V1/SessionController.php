@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Sessions\SessionStoreRequest;
-use App\Http\Resources\SessionCollection;
-use App\Http\Resources\SessionResource;
+use App\Http\Resources\V1\SessionCollection;
+use App\Http\Resources\V1\SessionResource;
 use App\Models\Device;
 use App\Models\Game;
 use App\Models\Session;

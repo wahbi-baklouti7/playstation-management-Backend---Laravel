@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Games\GameStoreRequest;
 use App\Http\Requests\Games\GameUpdateRequest;
+use App\Http\Resources\V1\GameResource;
 use App\Models\Game;
 use App\Models\User;
 use App\Traits\ApiRessourceTrait;
@@ -20,7 +21,7 @@ class GameController extends Controller
      */
     public function index()
     {
-        return $this->returnData(Game::all());
+        return $this->returnData(GameResource::collection(Game::all()));
     }
 
     /**
