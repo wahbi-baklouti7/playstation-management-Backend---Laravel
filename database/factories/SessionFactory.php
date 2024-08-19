@@ -7,6 +7,7 @@ use App\Models\Game;
 use App\Models\Session;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Nette\Utils\Random;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Session>
@@ -25,6 +26,8 @@ class SessionFactory extends Factory
             'amount' => $this->faker->numberBetween(0, 100),
             'start_time' => now(),
             'end_time' => now()->addHour(),
+            'created_at' => now()->subDays(Random::integer(0, 30)),
+            'updated_at' => now(),
             'user_id' => User::all()->random()->id ?? User::factory()->create()->id,
             'device_id' => Device::all()->random()->id ?? Device::factory()->create()->id,
             'game_id' => Game::all()->random()->id ?? Game::factory()->create()->id

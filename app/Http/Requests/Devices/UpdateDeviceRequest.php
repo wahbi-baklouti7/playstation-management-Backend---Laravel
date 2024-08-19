@@ -22,7 +22,7 @@ class UpdateDeviceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'min:3', 'max:30 , unique:devices,name,' . $this->device->id],
+            'name' => ['required', 'string', 'min:3', 'max:30' , 'unique:devices,name,' . $this->device->id],
         ];
     }
 }

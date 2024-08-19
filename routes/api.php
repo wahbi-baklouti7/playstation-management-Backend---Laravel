@@ -36,10 +36,16 @@ Route::apiResource('/games',GameController::class);
 // ===================== End Games Routes =====================
 
 // ===================== Begin Sessions Routes =====================
-Route::apiResource('/sessions',SessionController::class);
+// Route::get('sessions/gamess',[SessionController::class,'getGameSessionsCount']);
+
 Route::get('/sessions/user/{user}',[SessionController::class,'getUserSessions']);
-Route::get('sessions/device/{device}',[SessionController::class,'getDeviceSessions']);
-Route::get('sessions/game/{game}',[SessionController::class,'getGameSessions']);
+Route::get('/sessions/device/{device}',[SessionController::class,'getDeviceSessions']);
+Route::get('/sessions/game/{game}',[SessionController::class,'getGameSessions']);
+Route::get('/sessions/game-counts',[SessionController::class,'getGameSessionsCount']);
+Route::get('/sessions/device-total-amount',[SessionController::class,'getTotalAmountByDevice']);
+Route::get('/sessions/game-total-amount',[SessionController::class,'getTotalAmountByGame']);
+// Route::get('/sessions/game-counts',[SessionController::class,'getSessionsByDate']);
+Route::apiResource('/sessions',SessionController::class);
 // ===================== End Sessions Routes =====================
 
 // ===================== Begin Authentication Routes =====================

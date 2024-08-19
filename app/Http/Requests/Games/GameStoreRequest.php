@@ -24,7 +24,7 @@ class GameStoreRequest extends FormRequest
         return [
             'name'=>'required' , 'min:3' , 'max:30' , 'unique:games',
             'price'=>'required' , 'numeric' , 'min:0' , 'max:100',
-            'extra_time_price'=>'required' , 'numeric' , 'min:0' , 'max:100'
+            'extra_time_price'=> 'numeric' , 'min:0' , 'max:100'
         ];
     }
 }
