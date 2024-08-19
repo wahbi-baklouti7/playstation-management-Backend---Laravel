@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Users\StoreRequest;
 use App\Http\Requests\Users\UserUpdateRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Traits\ApiRessourceTrait;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class UserController extends Controller
     {
         //
         $users= User::all();
-        return $this->returnData($users);
+        return $this->returnData(UserResource::collection($users));
     }
 
     /**
@@ -39,11 +40,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        if($user){
-        return $this->returnData($user);
-        }
-        return $this->returnError('User not found',404);
-
+        return $this->returnData(new UserResource($user));
 
     }
 

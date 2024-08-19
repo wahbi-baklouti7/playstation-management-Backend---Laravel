@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Traits\ApiRessourceTrait;
 use Illuminate\Http\Request;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthenticationController extends Controller
 {
-    
+
     use ApiRessourceTrait;
 
     public function register(Request $request){
@@ -40,17 +41,31 @@ class AuthenticationController extends Controller
     }
     public function login(LoginRequest $request)
     {
-        $user = User::where('email', $request->email)->firstOrFail();
-        if(! $user || ! Hash::check($request->password, $user->password)){
+        $user = User::where('email', $request->email)->first();
+        if(!$user){
 
-            return $this->errorMessage('Invalid credentials', 401);
+            return $this->errorMessage('User with this email does not exist', 404);
+        }
+        if(!$user || !Hash::check($request->password, $user->password)){
+
+            return $this->errorMessage('Email or password is incorrect', 401);
         }
 
         $token = $user->createToken('auth_token')->plainTextToken;
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'Bearer'
-        ]);
+        // add token to ressource
+
+        return $this->returnData(
+           [ 'access_token'=> $token],
+            'User logged in successfully'
+        );
+        // return $this->returnData(
+        //     new UserResource($user)
+        // );
+
+        // return response()->json([
+        //     'access_token' => $token,
+        //     'token_type' => 'Bearer'
+        // ]);
 
     }
 

@@ -22,7 +22,17 @@ class StoreDeviceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>['required','string','min:3', 'max:30,unique:devices,name'],
+            'name'=>['required','string','min:3', 'max:30','unique:devices,name'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'The name field is required.',
+            'name.min' => 'The name must be at least 3 characters.',
+            'name.max' => 'The name may not be greater than 30 characters.',
+            'name.unique' => 'The device name is already exists.',
         ];
     }
 }
