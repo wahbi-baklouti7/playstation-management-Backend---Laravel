@@ -59,4 +59,10 @@ class DeviceController extends Controller
         $device->delete();
         return $this->successMessage('Device deleted successfully');
     }
+
+    public function changeDeviceStatus(Device $device){
+        $device->is_active = !$device->is_active;
+        $device->save();
+        return $this->returnData($device,'Device status changed successfully',200);
+    }
 }
