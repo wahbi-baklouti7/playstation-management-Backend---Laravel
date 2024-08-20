@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\V1\UserResource;
 use App\Models\User;
 use App\Traits\ApiRessourceTrait;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -52,8 +53,9 @@ class AuthenticationController extends Controller
         }
 
         $token = $user->createToken('auth_token')->plainTextToken;
-        // add token to ressource
 
+        $user->last_login = Carbon::now()->timezone('Africa/Tunis')->toDateTimeString();
+        $user->save();
         return $this->returnData(
            ["user"=>new UserResource($user),
             'access_token'=> $token],
