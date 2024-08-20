@@ -49,7 +49,7 @@ class SessionController extends Controller
     // );
         $session = Session::with(['user','device'=>function($query){
             $query->withTrashed();
-        },'game'=>fn($query)=>$query->withTrashed() ])->paginate($page_size);
+        },'game'=>fn($query)=>$query->withTrashed() ])->orderBy('created_at','desc')->paginate($page_size);
         // return $this->returnData(SessionResource::collection($session));
         return $this->returnData(new SessionCollection($session));
     }
