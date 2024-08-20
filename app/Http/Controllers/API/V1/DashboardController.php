@@ -15,7 +15,7 @@ class DashboardController extends Controller
 
 {
     use ApiRessourceTrait;
-  
+
 
 
     public function getGameSessionsCount(){
@@ -58,6 +58,7 @@ public function getTotalAmountByDeviceAndGameAndUser(Request $request){
 public function getTotalAmountByDevice(Request $request){
     $totalAmount = Session::select('devices.name',DB::raw('sum(amount) as total'))
     ->join('devices', 'sessions.device_id', '=', 'devices.id')
+    ->whereNull('devices.deleted_at')
     ->groupBy('devices.id')
     ->get();
     return $this->returnData($totalAmount,'Total amount retrieved successfully',200);
@@ -65,6 +66,7 @@ public function getTotalAmountByDevice(Request $request){
 public function getTotalAmountByGame(Request $request){
     $totalAmount = Session::select('games.name',DB::raw('sum(amount) as total'))
     ->join('games', 'sessions.game_id', '=', 'games.id')
+    ->whereNull('games.deleted_at')
     ->groupBy('games.id')
     ->get();
     return $this->returnData($totalAmount,'Total amount retrieved successfully',200);
