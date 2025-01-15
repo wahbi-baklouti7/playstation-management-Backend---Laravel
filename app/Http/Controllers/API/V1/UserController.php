@@ -32,7 +32,7 @@ class UserController extends Controller
 
         $validates = $request->validated();
         $user = User::create($validates);
-        return $this->returnData($user,'User created successfully',201);
+        return $this->returnData(new UserResource($user),'User created successfully',201);
     }
 
     /**

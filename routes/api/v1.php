@@ -30,8 +30,11 @@ Route::apiResource('/users',UserController::class);
 // ===================== End Users Routes =====================
 
 // ===================== Begin Devices Routes =====================
-Route::patch('/devices/change-status/{device}',[DeviceController::class,'changeDeviceStatus']);
-Route::apiResource('/devices',DeviceController::class);
+// Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::patch('/devices/change-status/{device}',[DeviceController::class,'changeDeviceStatus']);
+    Route::apiResource('/devices',DeviceController::class);
+// });
+
 // ===================== End Devices Routes =====================
 // ===================== Begin Games Routes =====================
 Route::apiResource('/games',GameController::class);
