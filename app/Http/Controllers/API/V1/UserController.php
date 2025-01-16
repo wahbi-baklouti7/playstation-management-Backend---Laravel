@@ -52,7 +52,7 @@ class UserController extends Controller
 
         $validates = $request->validated();
         $user->update($validates);
-        return $this->returnData($user,'User updated successfully',200);
+        return $this->returnData(new UserResource($user),'User updated successfully',200);
 
     }
 
