@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\V1;
 
+use App\Events\UpdateDeviceStatusEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Devices\StoreDeviceRequest;
 use App\Http\Requests\Devices\UpdateDeviceRequest;
@@ -63,6 +64,7 @@ class DeviceController extends Controller
     public function changeDeviceStatus(Device $device){
         $device->is_active = !$device->is_active;
         $device->save();
+        event(new UpdateDeviceStatusEvent($device));
         return $this->returnData($device,'Device status changed successfully',200);
     }
 }
