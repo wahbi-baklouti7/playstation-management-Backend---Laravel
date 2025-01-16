@@ -22,12 +22,12 @@ class UserUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
+        // dd( $this->user->id);
         return [
             'name' => ['required', 'string', 'max:30'],
             'email' => ['required', 'string', 'email', 'max:255 , unique:users,' . $this->user->id],
-            'password' => [ 'string', 'min:8',],
-
-            'confirm_password' => [ 'string', 'same:password'],
+            'password' => [ 'sometimes', 'string', 'min:8',],
+            'confirm_password' => [ 'sometimes', 'string', 'same:password'],
         ];
     }
 }
