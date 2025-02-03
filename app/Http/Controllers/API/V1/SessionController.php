@@ -61,7 +61,8 @@ class SessionController extends Controller
     {
         $validates = $request->validated();
         $session = Session::create($validates);
-        return $this->returnData($session,'Session created successfully',201);
+        $session->load('user','device','game');
+        return $this->returnData(new SessionResource($session),'Session created successfully',201);
 
     }
 
